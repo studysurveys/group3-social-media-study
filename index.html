@@ -97,20 +97,16 @@ if (want && FORMS[want]) {
 } else if (langs.length === 1) {
   go(langs[0]);
 } else {
-  var saved = get(KEY_L);
-  if (saved && FORMS[saved] && get(KEY_V)) {
-    go(saved);          /* returning on the same device: same language and same condition */
-  } else {
-    var box = document.getElementById("langs");
-    langs.forEach(function(l){
-      var b = document.createElement("button");
-      b.type = "button"; b.textContent = LABELS[l] || l; b.lang = l;
-      b.addEventListener("click", function(){ go(l); });
-      box.appendChild(b);
-    });
-    document.getElementById("loading").hidden = true;
-    document.getElementById("choose").hidden = false;
-  }
+  /* Always ask for the language; the condition (version) is still remembered per device. */
+  var box = document.getElementById("langs");
+  langs.forEach(function(l){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = LABELS[l] || l; b.lang = l;
+    b.addEventListener("click", function(){ go(l); });
+    box.appendChild(b);
+  });
+  document.getElementById("loading").hidden = true;
+  document.getElementById("choose").hidden = false;
 }
 </script>
 </body>
